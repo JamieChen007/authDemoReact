@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./Page/HomePage";
+import ProfilePage from "./Page/ProfilePage";
+import Layout from "./components/Layout";
+import AuthPage from "./Page/AuthPage";
+import NeedAuth from "./components/NeedAuth";
+import { useAutoLogout } from "./Hooks/useAutoLogout";
+import StudentPage from "./Page/StudentPage";
 
-function App() {
+const App = () => {
+  useAutoLogout();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path={"/"} element={<HomePage />} />
+        <Route
+          path={"/profile"}
+          element={
+            <NeedAuth>
+              <ProfilePage />
+            </NeedAuth>
+          }
+        />
+        <Route path={"/auth-form"} element={<AuthPage />} />
+        <Route
+          path={"/student"}
+          element={
+            <NeedAuth>
+              <StudentPage />
+            </NeedAuth>
+          }
+        />
+      </Routes>
+    </Layout>
   );
-}
+};
 
 export default App;

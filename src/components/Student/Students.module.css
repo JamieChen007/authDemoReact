@@ -1,0 +1,9 @@
+.Table,
+.Th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.DataInput {
+  width: 100px;
+}
